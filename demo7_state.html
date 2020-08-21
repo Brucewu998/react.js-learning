@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="build/react.dev.js"></script>
+    <script src="build/react-dom.dev.js"></script>
+    <script src="build/brower.min.js"></script>
+    <title>Demo-07</title>
+</head>
+<body>
+    <div id="demo-7"></div>
+    <script type="text/babel">
+        class Clock extends React.Component {
+            constructor(props) {
+                super(props);
+                this.state = { // 状态机
+                    date: new Date()
+                }
+            }
+
+            componentDidMount() {
+                this.timerID = setInterval(
+                    () => this.tick(),
+                    1000
+                )
+            }
+
+            tick() {
+                this.setState({ // setState用于更新组件的state
+                    date: new Date()
+                });
+            }
+
+            componentWillUnmount() {
+                clearInterval(this.timerID);
+            }
+
+            render() {
+                return (
+                    <div>
+                        <h1>现在的时间：</h1>
+                        <h2 className="h2">{ this.state.date.toLocaleTimeString() }</h2>
+                    </div>
+                )
+            }
+        }
+
+        ReactDOM.render(
+            <Clock />,
+            document.getElementById("demo-7")
+        )
+    </script>
+</body>
+</html>
+<style>
+    .h2 {
+        color: blue;
+    }
+</style>

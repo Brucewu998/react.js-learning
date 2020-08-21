@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="build/react.dev.js"></script>
+    <script src="build/react-dom.dev.js"></script>
+    <script src="build/brower.min.js"></script>
+    <title>Demo-10</title>
+</head>
+<body>
+    <div id="demo-10"></div>
+    <script type="text/babel">
+    /* 
+        key会传递消息给react，但不会传消息给组件，如果组件中要用到key的值，可用其他
+        显示的属性传值，例如id;
+    */
+        function NumberList(props) {
+            const numbers = props.numbers;
+            const listItems = numbers.map((item) => <li key={ item.key }>{ item.value }</li>);
+
+            return (
+                <ul>{ listItems }</ul>
+            );
+        }
+
+        function Blog(props) {
+            const slidbar = (
+                <ul>
+                    {props.posts.map((post) => 
+                        <li key={ post.id }>
+                            { post.title }
+                        </li>
+                    )}
+                </ul>
+            );
+            const content = props.posts.map((post) => 
+                <div key={ post.id }>
+                    <h3>{ post.title }</h3>
+                    <p>{ post.content }</p>
+                </div>
+            );
+
+            return (
+                <div>
+                    { slidbar }
+                    <hr />
+                    { content }
+                </div>
+            )
+        }
+
+        const numbers = [
+            {key: "guangzhou", value: "广州"},
+            {key: "shenzhen", value: "深圳"},
+            {key: "beijing", value: "北京"},
+            {key: "shanghai", value: "上海"}
+        ];
+
+        const posts = [
+            {id: 1, title: "Hello World", content: "Welcome to learning React!"},
+            {id: 2, title: "Installation", content: "You can install React from npm."}
+        ];
+
+        ReactDOM.render(
+            <div>
+                <NumberList numbers={ numbers } />
+                <hr />
+                <Blog posts={ posts } />
+                <hr />
+            </div>,
+            document.getElementById("demo-10")
+        )
+    </script>   
+</body>
+</html>

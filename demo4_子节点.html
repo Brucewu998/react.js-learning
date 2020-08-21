@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="build/react.dev.js"></script>
+    <script src="build/react-dom.dev.js"></script>
+    <script src="build/brower.min.js"></script>
+    <title>Demo-04</title>
+</head>
+<body>
+    <div id="demo-4" class="demo-4"></div>
+    <script type="text/babel">
+        class NoteList extends React.Component {
+            render() {
+                return (
+                    <ul>
+                        {
+                            React.Children.map(this.props.children, (child) => {
+                                return <li>{ child }</li>
+                            })
+                        }
+                    </ul>
+                )
+            }
+        }
+
+        ReactDOM.render(
+            <NoteList>
+                <span>hello</span>
+                <span>react</span>
+                <span>javascript</span>
+                <span>python</span>
+                <h1>C++</h1>
+                <h2>C</h2>
+            </NoteList>,
+            document.getElementById('demo-4')
+        )
+    </script>
+</body>
+</html>

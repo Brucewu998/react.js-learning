@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="build/react.dev.js"></script>
+    <script src="build/react-dom.dev.js"></script>
+    <script src="build/brower.min.js"></script>
+    <title>Demo-8</title>
+</head>
+<body>
+    <div id="demo-8"></div>
+    <script type="text/babel">
+        class Toggle extends React.Component {
+            constructor(props) {
+                super(props);
+                this.state = {
+                    isToggleOn: true
+                };
+
+                this.handleClick = this.handleClick.bind(this);
+
+            }
+
+            handleClick() {
+                this.setState(state => ({
+                    isToggleOn: !state.isToggleOn
+                }));
+            }
+
+            render() {
+                return (
+                    <button onClick={this.handleClick} className="button">
+                        {this.state.isToggleOn ? "ON" : "OFF"}
+                    </button>
+                )
+            }
+        }
+
+        ReactDOM.render(
+            <Toggle />,
+            document.getElementById("demo-8")
+        )
+    </script>
+</body>
+</html>
+<style>
+    .button {
+        width: 10vw;
+        height: 3vh;
+        background: -webkit-linear-gradient(45deg, rgba(255, 0, 0,.5), rgba( 255, 165, 0, 0.5),rgba(255, 255, 0,.5),rgba(0, 255, 0,.5),rgba(0, 127, 255,.5),rgba(0, 0, 255,.5),rgba(139, 0, 255,.5));
+        border-radius: 6px;
+        color:rgba(2, 88, 248)
+    }
+</style>

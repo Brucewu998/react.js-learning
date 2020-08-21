@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="build/react.dev.js"></script>
+    <script src="build/react-dom.dev.js"></script>
+    <script src="build/brower.min.js"></script>
+    <title>Demo-11</title>
+</head>
+<body>
+    <div id="demo-11"></div>
+    <script type="text/babel"> 
+        
+        function AddList(props) {
+            return (
+                <ul>
+                    { props.list.map((val) => 
+                        <li key={val.toString()}>
+                            输入的内容为：{val}
+                        </li>
+                    )}
+                </ul>
+            )
+        }
+
+        // Form 
+        class NameForm extends React.Component {
+            constructor(props) {
+                super(props);
+                this.state = {
+                    value: '',
+                    list: []
+                }
+                this.handleChange = this.handleChange.bind(this);
+                this.handleSubmit = this.handleSubmit.bind(this);
+            }
+
+            handleChange(event) {
+                this.setState({ value: event.target.value });
+                if (this.state.value) {
+                    this.setState(state => {
+                        state.list.push(state.value)
+                    })
+                }
+            }
+
+            handleSubmit(event) {
+                alert(`提交的内容：${ this.state.value }`);
+                event.preventDefault();
+            }
+
+            render() {
+                return(
+                    <div className="page-form">
+                        <form onSubmit={ this.handleSubmit }>
+                            <label>
+                                名字：
+                                <input type="text" value={ this.state.value } onChange={ this.handleChange } />
+                            </label>
+                            <input type="submit" value="提交" />
+                        </form>
+                        <AddList list={this.state.list} />
+                    </div>
+                )
+            }
+        }
+
+        class EssayForm extends React.Component {
+            constructor(props) {
+                super(props);
+                this.state = {
+                value: '请撰写一篇关于你喜欢的 DOM 元素的文章.',
+                list: []
+                };
+
+                this.handleChange = this.handleChange.bind(this);
+                this.handleSubmit = this.handleSubmit.bind(this);
+            }
+
+            handleChange(event) {
+                this.setState({value: event.target.value});
+                if (this.state.value) {
+                    this.setState(state => {
+                        state.list.push(state.value)
+                    })
+                }
+            }
+
+            handleSubmit(event) {
+                alert('提交的文章: ' + this.state.value);
+                event.preventDefault();
+            }
+
+            render() {
+                return (
+                    <div className="page-textarea"> 
+                        <form onSubmit={this.handleSubmit}>
+                            <label>
+                            <h3>文章:</h3>
+                            <textarea className="text-area" value={this.state.value} onChange={this.handleChange} />
+                            </label>
+                            <br />
+                            <input type="submit" value="提交" />
+                        </form>
+                        <AddList list={this.state.list} />
+                    </div>
+                );
+            }
+        }
+       
+        ReactDOM.render(
+            <div className="main-page-container">
+                <NameForm />
+                <EssayForm />
+            </div>,
+            document.getElementById("demo-11")
+        )
+    </script>
+</body>
+</html>
+<style>
+    .page-form {
+        height: 5vh;
+    }
+    .page-textarea {
+        margin: 0 30vw;
+    }
+    .text-area {
+        width: 20vw;
+        height: 20vh;
+    }
+    .main-page-container {
+        height: 100vh;
+        display: flex;
+        flex-direction: row;
+        justify-content: start;
+    }
+</style>

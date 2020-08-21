@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="build/react.dev.js"></script>
+    <script src="build/react-dom.dev.js"></script>
+    <script src="build/brower.min.js"></script>
+    <script src="build/prop-types.js"></script>
+    <title>Demo-05</title>
+</head>
+<body>
+    <div id="demo-5"></div>
+    <script type="text/babel">
+        class Title extends React.Component {
+            constructor(props) {
+                super(props);
+            }
+            render() {
+                return <h1>{ this.props.title }</h1>
+            }
+        }
+
+        Title.propTypes = {  // 设置props类型和required
+            title: PropTypes.string
+        }
+
+        Title.defaultProps = { // 设置默认值
+            title: "Bruce"
+        }
+    
+        // 如果title为非string,会报错
+        ReactDOM.render(
+            <Title />,
+            document.getElementById("demo-5")
+        )
+    </script>
+</body>
+</html>

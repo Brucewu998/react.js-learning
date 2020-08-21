@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="build/react.dev.js"></script>
+    <script src="build/react-dom.dev.js"></script>
+    <script src="build/brower.min.js"></script>
+    <title>Dmeo-06</title>
+</head>
+<body>
+    <div id="demo-6"></div>
+    <script type="text/babel">
+        class MyCompinent extends React.Component {
+            constructor(props) {
+                super(props);
+                 // 创建一个 ref 来存储 textInput 的 DOM 元素
+                this.textInput = React.createRef();
+                this.focusTextInput = this.focusTextInput.bind(this); // 创建一个新的函数
+            }
+
+            focusTextInput() {
+                /* 
+                    直接使用原生 API 使 text 输入框获得焦点
+                    注意：我们通过 "current" 来访问 DOM 节点
+                */
+                this.textInput.current.focus();
+            }
+
+            render() {
+                 /*
+                    告诉 React 我们想把 <input> ref 关联到
+                    构造器里创建的 `textInput` 上
+                */
+                return (
+                    <div>
+                        <input type="text" ref={ this.textInput } />
+                        <input 
+                            className="input-button"
+                            type="button"
+                            value="Focus the text input" 
+                            onClick={ this.focusTextInput }
+                        />
+                    </div>
+                )
+            }
+        }
+
+        ReactDOM.render(
+            <MyCompinent />,
+            document.getElementById("demo-6")
+        )
+    </script>
+</body>
+</html>
+<style>
+    .input-button {
+        cursor: pointer;
+    }
+</style>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="build/react.dev.js"></script>
+    <script src="build/react-dom.dev.js"></script>
+    <script src="build/brower.min.js"></script>
+    <title>Demo-9</title>
+</head>
+<body>
+    <div id="demo-9"></div>
+    <script type="text/babel">
+       function WarningBanner(props) {
+           if(!props.warn) {
+               return null;
+           }
+           return (
+               <div className="warning">
+                    这是一条警告!
+               </div>
+           );
+       }
+
+       class Page extends React.Component {
+           constructor(props) {
+               super(props);
+               this.state = {
+                   showWarning: true
+               };
+               this.handleToggleClick = this.handleToggleClick.bind(this);
+           }
+
+           handleToggleClick() {
+               this.setState(state => ({
+                   showWarning: !state.showWarning
+               }))
+           }
+
+           render() {
+               return (
+                   <div>
+                        <button className="button" onClick={ this.handleToggleClick }>
+                            {this.state.showWarning ? "隐藏" : "显示"}
+                        </button>
+                        <WarningBanner warn={ this.state.showWarning } />
+                   </div>
+               )
+           }
+       }
+
+       ReactDOM.render(
+           <Page />,
+           document.getElementById("demo-9")
+       )
+    </script>
+</body>
+</html>
+<style>
+    .button {
+        width: 6vw;
+        height: 3vh;
+        background: -webkit-linear-gradient(45deg, rgba(255, 0, 0,.5), rgba( 255, 165, 0, 0.5),rgba(255, 255, 0,.5),rgba(0, 255, 0,.5),rgba(0, 127, 255,.5),rgba(0, 0, 255,.5),rgba(139, 0, 255,.5));
+        border-radius: 6px;
+        color:rgba(2, 88, 248);
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer; 
+    }
+    .warning {
+        color:chocolate;
+        margin-top: 20px;
+        font-size: 30px;
+        font-weight: bold;
+    }
+</style>
