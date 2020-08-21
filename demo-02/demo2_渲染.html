@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo-02</title>
+    <script src="../build/react.dev.js"></script>
+    <script src="../build/react-dom.dev.js"></script>
+    <script src="../build/brower.min.js"></script>
+</head>
+<body>
+    <div id="demo-2" class="demo-2"></div>
+    <script type="text/babel">
+        function Header(props) {
+            return <div>Header</div>
+        }
+
+        function Slider(props) {
+            return <div>Slider</div>
+        }
+
+        function Content(propw) {
+            return (<div>Content</div>)
+        }
+
+        function Footer(props) {
+            return <div>Footer</div>
+        }
+
+        ReactDOM.render(
+            <div>
+                <Header />
+                <Slider />
+                <Content />
+                <Footer />
+            </div>,
+            document.getElementById('demo-2')
+        );
+    </script>
+</body>
+</html>
+<style>
+    .demo-2 {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        background: rgba(12, 66, 88, .3);
+    }
+    .demo-h {
+        color: rgb(109, 28, 8)
+    }
+</style>
