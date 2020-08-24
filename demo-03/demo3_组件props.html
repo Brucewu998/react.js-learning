@@ -10,7 +10,7 @@
     <title>Demo-05</title>
 </head>
 <body>
-    <div id="demo-5"></div>
+    <div id="demo-3"></div>
     <script type="text/babel">
         class Title extends React.Component {
             constructor(props) {
@@ -26,13 +26,13 @@
         }
 
         Title.defaultProps = { // 设置默认值
-            title: "Bruce"
+            title: "React.js学习"
         }
     
         // 如果title为非string,会报错
         ReactDOM.render(
             <Title />,
-            document.getElementById("demo-5")
+            document.getElementById("demo-3")
         )
     </script>
 </body>
