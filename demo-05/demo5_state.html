@@ -15,8 +15,11 @@
             constructor(props) {
                 super(props);
                 this.state = { // 状态机
-                    date: new Date()
+                    date: new Date(),
+                    show: true,
+                    text: "隐藏"
                 }
+                this.handleClickShow = this.handleClickShow.bind(this);
             }
 
             componentDidMount() {
@@ -32,20 +35,34 @@
                 });
             }
 
+            handleClickShow() {
+                this.setState(state => ({
+                    show: !state.show,
+                    text: !state.show ? "隐藏" : "显示"
+                }))
+                
+            }
+
             componentWillUnmount() {
                 clearInterval(this.timerID);
             }
 
             render() {
+                let isShow = this.state.show;
+                let element;
+                if (isShow) {
+                    element = <h2 className="h2">{ this.state.date.toLocaleTimeString() }</h2>
+                } else {
+                    element = null;
+                }
                 return (
                     <div>
-                        <h1>现在的时间：</h1>
-                        <h2 className="h2">{ this.state.date.toLocaleTimeString() }</h2>
+                        <button onClick={this.handleClickShow}>{this.state.text}计时器</button>
+                        {element}
                     </div>
                 )
             }
         }
-
         ReactDOM.render(
             <Clock />,
             document.getElementById("demo-7")

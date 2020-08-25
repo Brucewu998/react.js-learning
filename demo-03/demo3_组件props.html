@@ -25,8 +25,12 @@
             title: PropTypes.string
         }
 
-        Title.defaultProps = { // 设置默认值
-            title: "React.js学习"
+        // Title.defaultProps = { // 设置默认值
+            // title: "React.js学习"
+        //}
+
+        Title.propTypes= {
+            title: PropTypes.string.isRequired
         }
     
         // 如果title为非string,会报错
