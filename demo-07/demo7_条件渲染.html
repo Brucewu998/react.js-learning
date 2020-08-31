@@ -6,18 +6,13 @@
     <script src="../build/react.dev.js"></script>
     <script src="../build/react-dom.dev.js"></script>
     <script src="../build/brower.min.js"></script>
-    <title>Demo-9</title>
+    <title>Demo-07</title>
 </head>
 <body>
-    <div id="demo-9"></div>
+    <div id="demo-7"></div>
     <script type="text/babel">
         function Greeting(props) {
-            const isLoggedIn = props.isLoggedIn;
-            if (isLoggedIn) {
-                return <h1>欢迎回来</h1>
-            }
-
-            return <h1>请登录</h1>
+            return <h1>{props.isLoggedIn ? "欢迎回来" : "请登录"}</h1> 
         }
 
         function LoginButton(props) {
@@ -72,7 +67,7 @@
         }
         ReactDOM.render(
             <LoginControl />,
-            document.getElementById("demo-9"),
+            document.getElementById("demo-7"),
         )
     </script>
 </body>
