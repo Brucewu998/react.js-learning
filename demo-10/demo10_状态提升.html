@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../build/react.dev.js"></script>
+    <script src="../build/react-dom.dev.js"></script>
+    <script src="../build/brower.min.js"></script>
+    <title>Demo-10</title>
+</head>
+<body>
+    <div id="demo-10"></div>
+    <script type="text/babel">
+        function BoilingVerdit(props) {
+            if (props.celsius >= 100) {
+                return <p>水沸腾了</p>;
+            }
+            return <p>水还未沸腾</p>;
+        }
+
+        function toCeldius(f) {
+            return (f - 32) * 5 / 9;
+        }
+
+        function toFahrenheit(c) {
+            return (c * 9 / 5) + 32;
+        }
+
+        function tryCobvert(temp, convert) {
+            const input = parseFloat(temp);
+            if (Number.isNaN(input)) {
+                return '';
+            } 
+            const output = convert(input);
+            const rounded = Math.round(output * 1000) / 1000;
+            return rounded.toString();
+        }
+
+        const scaleName = {
+            c: '摄氏度',
+            f: '华氏度'
+        }
+
+        class TemperatureInput  extends React.Component {
+            constructor(props) {
+                super(props);
+                this.handleChange = this.handleChange.bind(this);
+            }
+
+            handleChange(event) {
+                this.props.onTempChange(event.target.value);
+            }
+
+            render() {
+                const temp = this.props.temp;
+                const scale = this.props.scale;
+                return (
+                    <fieldset>
+                        <legend>
+                            请输入{scaleName[scale]}:</legend>
+                            <input 
+                                value = {temp}
+                                onChange={this.handleChange}
+                            />
+                    </fieldset>    
+                )
+            }
+        }
+
+        class Calculator extends React.Component {
+            constructor(props) {
+                super(props);
+                this.handleCelsiusChange = this.handleCelsiusChange.bind(this);
+                this.handleFahrenheitChange = this.handleFahrenheitChange.bind(this);
+                this.state = {
+                    temp: '',
+                    scale: 'c'
+                }
+            }
+            handleCelsiusChange(temp) {
+                this.setState({
+                    scale: 'c',
+                    temp
+                })
+            }
+
+            handleFahrenheitChange(temp) {
+                this.setState({
+                    scale: 'f',
+                    temp
+                })
+            }
+
+            render() {
+                const scale = this.state.scale;
+                const temp = this.state.temp;
+                const celsius = scale === 'f' ? tryCobvert(temp, toCeldius) : temp;
+                const fahrenheit = scale === 'c' ? tryCobvert(temp, toFahrenheit) : temp;
+                return (
+                    <div>
+                        <TemperatureInput 
+                            scale="c" 
+                            temp={celsius}
+                            onTempChange={this.handleCelsiusChange}
+                        />
+                        <TemperatureInput 
+                            scale="f" 
+                            temp={fahrenheit}
+                            onTempChange = {this.handleFahrenheitChange}
+                        />
+                        <BoilingVerdit celsius={parseFloat(celsius)} />
+                    </div>
+                )
+            }
+        }
+
+        ReactDOM.render(
+            <Calculator />,
+            document.getElementById("demo-10")
+        )
+    </script>  
+</body>
+</html>
