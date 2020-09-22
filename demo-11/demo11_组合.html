@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../build/react.dev.js"></script>
+    <script src="../build/react-dom.dev.js"></script>
+    <script src="../build/brower.min.js"></script>
+    <title>组合</title>
+</head>
+<body>
+    <div id="demo-11-1"></div>
+    <script type="text/babel">
+        function FancyBorder(props) {
+            // props.children是根节点内容
+            return (
+                <div className={'FancyBorder FancyBorder-' + props.color}>
+                    {props.children}
+                </div>
+            )
+        }
+
+        function Dialog(props) {
+            return (
+                <FancyBorder color="blue">
+                    <h1 className="Dialog-title">{props.title}</h1>
+                    <p className="Dialog-message">{props.message}</p>
+                    {props.children}
+                </FancyBorder>
+            )
+        }
+
+        function WelcomeDialog() {
+            return (
+                <Dialog title="欢迎" message="谢谢你的到来！" />
+            )
+        }
+
+        class SignUpDialog extends React.Component {
+            constructor(props) {
+                super(props);
+                this.state = {login: ''};
+                this.handleChange = this.handleChange.bind(this);
+                this.handleSignUp = this.handleSignUp.bind(this);
+            }
+
+            handleChange(event) {
+                this.setState({
+                    login: event.target.value
+                })
+            }
+
+            handleSignUp() {
+                alert(`欢迎你, ${this.state.login}!`);
+            }
+
+            render() {
+              return (
+                <Dialog title="火星探索项目" message="請輸入你的姓名：">
+                    <input value={this.state.login} onChange={this.handleChange} />
+                    <button onClick={this.handleSignUp}>
+                        登录
+                    </button>
+              </Dialog>
+              )
+            }
+        }
+
+        ReactDOM.render(
+            <SignUpDialog />,
+            document.getElementById("demo-11-1")
+        )
+
+
+    </script>
+</body>
+</html>
+<style scoped>
+.FancyBorder {
+  padding: 10px 10px;
+  border: 6px solid;
+  text-align: center;
+}
+
+.FancyBorder-blue {
+  border-color: blue;
+}
+
+.Dialog-title {
+  margin: 0;
+  font-family: sans-serif;
+}
+
+.Dialog-message {
+  font-size: larger;
+}
+
+</style>
